@@ -9,4 +9,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD ["python","./vsts-cli.py"]
+CMD ["python","./vsts_cli.py"]
