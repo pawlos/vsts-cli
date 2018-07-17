@@ -67,3 +67,12 @@ def print_test_runs(test_runs):
 		print('Id: {}, Name: {}, Status: {}'.format(
 				bold(t['id']), bold(t['name']), _status(t['state'])
 			))
+
+def print_list_queries(queires):
+	print(header('Queries:'))
+	for q in queires['value']:
+		print('Id: {}, Name: {}'.format(bold(q['id']), bold(q['name'])))
+		children = q['children']
+		if children is not None:
+			for c in children:
+				print('\tId: {}, Name: {}'.format(bold(c['id']),bold(c['name'])))
