@@ -12,6 +12,13 @@ def help_list_test_cases(self):
 	print(self.status_test_suite())
 
 def do_list_test_cases(self, args):
+	if self.test_plan is None:
+		print(self.status_test_plan())
+		return
+	if self.test_suite is None:
+		print(self.status_test_suite())
+		return
+
 	print_test_cases(
 		self.vsts_request.get(
 			self.project_name,
