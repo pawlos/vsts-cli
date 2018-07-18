@@ -10,7 +10,6 @@ def help_team_instance(self):
 	)
 
 def do_team_instance(self, args):
-	'''Sets the team instance for the VSTS requests'''
 	if args == '':
 		print(error('Team instance not provided'))
 		return

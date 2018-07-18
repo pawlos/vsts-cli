@@ -14,6 +14,3 @@ def do_test_suite(self, args):
 
 	self.test_suite = args
 	print(self.status_test_suite())
-	'''vsts_print(
-		vsts_request('_apis/test/plans/{}/suites/{}?$expand={}&api-version=5.0-preview.2'.format(test_plan_id, suite_id, expand)),
-		print_suite)'''
