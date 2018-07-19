@@ -10,6 +10,16 @@ def help_list_queries(self):
 	print(self.status_project_name())
 
 def do_list_queries(self, args):
+	if self.project_name is None:
+		print(self.status_project_name())
+		return
+	if self.token is None:
+		print(self.status_token())
+		return
+	if self.team_instance is None:
+		print(self.status_team_instance())
+		return
+		
 	result = self.vsts_request.get(self.project_name, '_apis/wit/queries?$expand=all&$depth=1&api-version=5.0-preview.2')
 	
 	print_list_queries(result)
