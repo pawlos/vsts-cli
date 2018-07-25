@@ -20,24 +20,6 @@ def inconclusive(s):
 def indent(s):
 	return '\t'+str(s)
 
-def print_suites(d):
-	print(header('Test suites:'))
-	for s in d:
-		print('Id: {}, Name: {}'.format(bold(s.id), bold(s.name)))
-
-def print_projects(projects):
-	print(header('Projects:'))
-	for p in projects:
-		print_project(p)
-
-def print_project(project):
-	print('Id: {}, Name: {}'.format(bold(project.id), bold(project.name)))
-
-def print_tests_plans(plans):
-	print(header('Test plans:'))
-	for p in plans:
-		print('Id: {}, Name: {}'.format(bold(p.id), bold(p.name)))
-
 def print_tests_plan(plan):
 	print(header('Test plan:'))
 	print('Id: {}, Name: {}, Root suite id: {}'.format(
@@ -50,32 +32,9 @@ def print_suite(suite):
 			bold(suite['id']), bold(suite['name']), bold(suite['testCaseCount'])
 		))
 
-def print_test_cases(test_cases):
-	for t in test_cases['value']:
-		print(t)
-		print('Id: {}, Tester: {}'.format(
-			bold(t['testCase']['id']), bold(t['pointAssignments'][0]['tester']['displayName'])
-		))
-
 def _status(status):
 	if status == 'InProgress' or status == 'NeedsInvestigation':
 		return inconclusive(status)
 	if status == 'Completed':
 		return ok(status)
 	return bold(status)
-
-def print_test_runs(test_runs):
-	print(header('Test runs:'))
-	for t in test_runs['value']:
-		print('Id: {}, Name: {}, Status: {}'.format(
-				bold(t['id']), bold(t['name']), _status(t['state'])
-			))
-
-def print_list_queries(queries):
-	print(header('Queries:'))
-	for q in queries['value']:
-		print('Id: {}, Name: {}'.format(bold(q['id']), bold(q['name'])))
-		children = q['children']
-		if children is not None:
-			for c in children:
-				print('\tId: {}, Name: {}'.format(bold(c['id']),bold(c['name'])))

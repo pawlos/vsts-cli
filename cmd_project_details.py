@@ -1,5 +1,5 @@
 #cmd_project_details.py
-from printers import error, bold, header, print_project
+from printers import error, bold, header
 import uuid
 
 def help_project_details(self):
@@ -15,4 +15,7 @@ def do_project_details(self, args):
 		return
 
 	project = self.core_client.get_project(uuid.UUID(args))
-	print_project(project)
+	_print_project(project)
+
+def _print_project(project):
+	print('Id: {}, Name: {}'.format(bold(project.id), bold(project.name)))

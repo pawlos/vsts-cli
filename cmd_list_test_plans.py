@@ -1,5 +1,5 @@
 #cmd_list_test_plans.py
-from printers import error, bold, header, print_tests_plans
+from printers import error, bold, header
 from models import TestPlan
 
 def help_list_test_plans(self):
@@ -21,4 +21,9 @@ def do_list_test_plans(self, args):
 			result['value']
 		]
 
-	print_tests_plans(vsts_test_plans)
+	_print_tests_plans(vsts_test_plans)
+
+def _print_tests_plans(plans):
+	print(header('Test plans:'))
+	for p in plans:
+		print('Id: {}, Name: {}'.format(bold(p.id), bold(p.name)))

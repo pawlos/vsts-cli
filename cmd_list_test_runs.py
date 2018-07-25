@@ -1,6 +1,6 @@
 #cmd_list_test_runs.py
 
-from printers import header, bold, error, print_test_runs
+from printers import header, bold, error
 
 def help_list_test_runs(self):
 	print(header('Lists all tests runs'))
@@ -17,5 +17,13 @@ def do_list_test_runs(self, args):
 		print(error('Connection to VSTS not established'))
 		return
 
-	print_test_runs(
+	_print_test_runs(
 		self.vsts_request.get(self.project_name, '_apis/test/runs?api-version=5.0-preview.2'))
+
+
+def _print_test_runs(test_runs):
+	print(header('Test runs:'))
+	for t in test_runs['value']:
+		print('Id: {}, Name: {}, Status: {}'.format(
+				bold(t['id']), bold(t['name']), _status(t['state'])
+			))

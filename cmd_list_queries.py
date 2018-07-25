@@ -1,5 +1,5 @@
 #cmd_list_queries.py
-from printers import error, bold, header, print_list_queries
+from printers import error, bold, header
 import pprint
 
 def help_list_queries(self):
@@ -22,4 +22,13 @@ def do_list_queries(self, args):
 		
 	result = self.vsts_request.get(self.project_name, '_apis/wit/queries?$expand=all&$depth=1&api-version=5.0-preview.2')
 	
-	print_list_queries(result)
+	_print_list_queries(result)
+
+def _print_list_queries(queries):
+	print(header('Queries:'))
+	for q in queries['value']:
+		print('Id: {}, Name: {}'.format(bold(q['id']), bold(q['name'])))
+		children = q['children']
+		if children is not None:
+			for c in children:
+				print('\tId: {}, Name: {}'.format(bold(c['id']),bold(c['name'])))

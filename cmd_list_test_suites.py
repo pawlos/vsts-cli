@@ -1,5 +1,5 @@
 #cmd_list_test_suites.py
-from printers import error, bold, header, print_suites
+from printers import error, bold, header
 from models import TestSuite
 
 def help_list_test_suites(self):
@@ -22,4 +22,9 @@ def do_list_test_suites(self, args):
 			TestSuite(d) for d in result['value']
 		]
 
-	print_suites(vsts_test_suites)
+	_print_suites(vsts_test_suites)
+
+def _print_suites(d):
+	print(header('Test suites:'))
+	for s in d:
+		print('Id: {}, Name: {}'.format(bold(s.id), bold(s.name)))

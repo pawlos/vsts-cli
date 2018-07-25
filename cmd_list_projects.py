@@ -1,5 +1,5 @@
 #cmd_list_projects.py
-from printers import error, bold, header, print_projects
+from printers import error, bold, header
 from models import Project
 
 def help_list_projects(self):
@@ -17,4 +17,13 @@ def do_list_projects(self, args):
 	   self.vsts_projects = [Project(p.id, p.name) for p in 
 						  	 self.core_client.get_projects()]
 	
-	print_projects(self.vsts_projects)
+	_print_projects(self.vsts_projects)
+
+
+def _print_projects(projects):
+	print(header('Projects:'))
+	for p in projects:
+		_print_project(p)
+
+def _print_project(project):
+	print('Id: {}, Name: {}'.format(bold(project.id), bold(project.name)))

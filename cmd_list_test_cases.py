@@ -1,5 +1,5 @@
 #cmd_list_test_case.py
-from printers import header, bold, print_test_cases
+from printers import header, bold
 
 
 def help_list_test_cases(self):
@@ -19,8 +19,15 @@ def do_list_test_cases(self, args):
 		print(self.status_test_suite())
 		return
 
-	print_test_cases(
+	_print_test_cases(
 		self.vsts_request.get(
 			self.project_name,
 			'_apis/test/plans/{}/suites/{}/testcases?api-version=5.0-preview.2'.format(self.test_plan, self.test_suite)),
 		)
+
+def _print_test_cases(test_cases):
+	for t in test_cases['value']:
+		print(t)
+		print('Id: {}, Tester: {}'.format(
+			bold(t['testCase']['id']), bold(t['pointAssignments'][0]['tester']['displayName'])
+		))
