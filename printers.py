@@ -68,9 +68,9 @@ def print_test_runs(test_runs):
 				bold(t['id']), bold(t['name']), _status(t['state'])
 			))
 
-def print_list_queries(queires):
+def print_list_queries(queries):
 	print(header('Queries:'))
-	for q in queires['value']:
+	for q in queries['value']:
 		print('Id: {}, Name: {}'.format(bold(q['id']), bold(q['name'])))
 		children = q['children']
 		if children is not None:
