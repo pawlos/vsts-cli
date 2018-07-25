@@ -20,7 +20,8 @@ class VSTSQuery(cmd.Cmd):
 	from cmd_list_test_runs import do_list_test_runs, help_list_test_runs
 	from cmd_list_test_cases import do_list_test_cases, help_list_test_cases
 	from cmd_list_queries import do_list_queries, help_list_queries
-	
+	from cmd_query import do_query, help_query
+
 	def __init__(self):
 		super(VSTSQuery, self).__init__()
 		self.intro = header('VSTS CLI @ Paweł Łukasik 2018')

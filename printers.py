@@ -17,6 +17,9 @@ def error(s):
 def inconclusive(s):
 	return bcolors.WARNING+str(s)+bcolors.ENDC
 
+def indent(s):
+	return '\t'+str(s)
+
 def print_suites(d):
 	print(header('Test suites:'))
 	for s in d:
