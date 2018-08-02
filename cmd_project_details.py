@@ -1,17 +1,25 @@
 #cmd_project_details.py
-from printers import error, bold, header
+from printers import error, bold, header, ok, print_prerequisites, print_statuses
 import uuid
 
 def help_project_details(self):
 	print(header('Get details of the selected project'))
 	print(bold('Requires:'))
-	print(self.status_token())
-	print(self.status_team_instance())
-	print('id of the project passed as an argument')
+	print_prerequisites(prerequisites(self))
+
+def project_name_status(args):
+	project_name_not_set = args == '' or args is None
+	return (project_name_not_set, 
+		    bold('Project id: ') + (error('not passed as an argument') if project_name_not_set else ok(args)))
+
+def prerequisites(vsts, args = None):
+	return [(vsts.status_token()),
+			(vsts.status_team_instance()),
+			(vsts.status_project_name()),
+			(project_name_status(args))]
 
 def do_project_details(self, args):
-	if args == '':
-		print(error('Project id not passed as an argument'))
+	if not print_statuses(prerequisites(self)):
 		return
 
 	project = self.core_client.get_project(uuid.UUID(args))

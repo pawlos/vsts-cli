@@ -1,16 +1,18 @@
 #cmd_list_projects.py
-from printers import error, bold, header
+from printers import error, bold, header, print_prerequisites, print_statuses
 from models import Project
 
 def help_list_projects(self):
 	print(header('Lists projects in the team instance'))
 	print(bold('Requires: '))
-	print(self.status_token())
-	print(self.status_team_instance())
+	print_prerequisites(prerequisites(self))
+
+def prerequisites(vsts):
+	return [vsts.status_token(),
+			vsts.status_team_instance()]
 
 def do_list_projects(self, args):
-	if self.core_client is None:
-		print(error('Connection to VSTS not established'))
+	if not print_statuses(prerequisites(self)):
 		return
 
 	if self.vsts_projects is None or self.force:

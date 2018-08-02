@@ -1,19 +1,20 @@
 #cmd_list_test_suites.py
-from printers import error, bold, header
+from printers import error, bold, header, print_prerequisites, print_statuses
 from models import TestSuite
 
 def help_list_test_suites(self):
 	print(header('Lists tests suites'))
 	print(bold('Requires:'))
-	print(self.status_token())
-	print(self.status_team_instance())
-	print(self.status_project_name())
-	print(self.status_test_plan())
+	print_prerequisites(prerequisites(self))
+
+def prerequisites(vsts):
+	return [vsts.status_token(),
+			vsts.status_team_instance(),
+			vsts.status_project_name(),
+			vsts.status_test_plan()]
 
 def do_list_test_suites(self, args):
-	if (self.vsts_request == None or 
-		self.project_name == None):
-		print(error('Cannot run command. Make sure connection to VSTS is establish.'))
+	if not print_statuses(prerequisites(self)):
 		return
 
 	if self.vsts_test_suites is None or self.force:

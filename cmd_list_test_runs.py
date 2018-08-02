@@ -1,20 +1,20 @@
 #cmd_list_test_runs.py
 
-from printers import header, bold, error
+from printers import header, bold, error, print_statuses, print_prerequisites, _status
 
 def help_list_test_runs(self):
 	print(header('Lists all tests runs'))
 	print(bold('Requires:'))
-	print(self.status_token())
-	print(self.status_team_instance())
-	print(self.status_project_name())
+	print_prerequisites(prerequisites(self))
+
+def prerequisites(vsts):
+	return [(vsts.token is None, vsts.status_token()),
+			(vsts.team_instance is None, vsts.status_team_instance()),
+			(vsts.project_name is None, vsts.status_project_name())]
+
 
 def do_list_test_runs(self, args):
-	if self.project_name is None:
-		print(error('Project name not set'))
-		return
-	if self.vsts_request is None:
-		print(error('Connection to VSTS not established'))
+	if not print_statuses(prerequisites(self)):
 		return
 
 	_print_test_runs(

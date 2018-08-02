@@ -1,12 +1,17 @@
 #token.py
-from printers import error, ok, bold, header
+from printers import error, ok, bold, header, print_prerequisites
 from msrest.authentication import BasicAuthentication
 
 def status_token(self):
-	return bold('Token: ') + (error('not set') if self.token is None else ok('************ (set)'))
+	return (self.token is None, 
+		    bold('Token: ') + (error('not set') if self.token is None else ok('************ (set)')))
 
 def help_token(self):
-	print(header('Sets the token for the VSTS requests.\n')+self.status_token())
+	print(header('Sets the token for the VSTS requests.'))
+	print_prerequisites(prerequisites(self))
+
+def prerequisites(vsts):
+	return [vsts.status_token()]
 
 def do_token(self, args):
 	if args == '':
@@ -15,5 +20,5 @@ def do_token(self, args):
 
 	self.token = args
 	self.credentials = BasicAuthentication('', self.token)
-	print(self.status_token())
+	print_prerequisites(prerequisites(self))
 	self.setup_connection()

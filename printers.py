@@ -32,6 +32,18 @@ def print_suite(suite):
 			bold(suite['id']), bold(suite['name']), bold(suite['testCaseCount'])
 		))
 
+def print_statuses(statues):
+	is_error = False
+	for c, s in statues:
+		if c:
+			print(s)
+			is_error = True
+	return not is_error
+
+def print_prerequisites(statuses):
+	for c, s in statuses:
+		print(s)
+
 def _status(status):
 	if status == 'InProgress' or status == 'NeedsInvestigation':
 		return inconclusive(status)
