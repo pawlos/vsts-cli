@@ -17,5 +17,5 @@ class TestSuite(object):
 		self.testCaseCount = data['testCaseCount']
 
 class TestCase(object):
-	def __init(self, data):
+	def __init__(self, data):
 		self.id = int(data('id'))
