@@ -32,7 +32,12 @@ def _print_query(result, id):
 	print(header('Query ')+bold(id)+' results')
 	print(header("Columns: ")+', '.join(map(lambda c: c['name'],result['columns'])))
 	print(header('Work items in the query:'))
-	relations = result['workItemRelations']
-	print(indent(
-		', '.join(map(lambda wi: str(wi['target']['id']), relations)))
-	)
+	if 'workItemRelations' in result:
+		relations = result['workItemRelations']
+		print(indent(
+			', '.join(map(lambda wi: str(wi['target']['id']), relations)))
+		)
+	elif 'workItems' in result:
+		workItems = result['workItems']
+		print(indent(', '.join(map(lambda wi: str(wi['id']), workItems)))
+		)
