@@ -1,5 +1,5 @@
 #cmd_query.py
-from printers import error, bold, header, indent, print_prerequisites, print_statuses
+from printers import error, bold, header, ok, indent, print_prerequisites, print_statuses
 import pprint
 
 def help_query(self):
