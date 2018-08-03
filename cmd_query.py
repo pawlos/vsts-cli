@@ -1,5 +1,6 @@
 #cmd_query.py
 from printers import error, bold, header, ok, indent, print_prerequisites, print_statuses
+from models import WorkItemRelation, WorkItem
 import pprint
 
 def help_query(self):
@@ -25,19 +26,20 @@ def do_query(self, args):
 		return
 
 	result = self.vsts_request.get(self.project_name, '_apis/wit/wiql/{}?api-version=5.0-preview.2'.format(args))
+	if not result:
+		return
 
 	_print_query(result, args)
 
 def _print_query(result, id):
-	print(header('Query ')+bold(id)+' results')
+	print(header('Query ')+bold(id)+header(' results'))
 	print(header("Columns: ")+', '.join(map(lambda c: c['name'],result['columns'])))
 	print(header('Work items in the query:'))
 	if 'workItemRelations' in result:
 		relations = result['workItemRelations']
-		print(indent(
-			', '.join(map(lambda wi: str(wi['target']['id']), relations)))
-		)
+		relations = map(lambda wir: WorkItemRelation(wir), relations)
+		print('\n'.join([str(wir) for wir in relations]))
 	elif 'workItems' in result:
 		workItems = result['workItems']
-		print(indent(', '.join(map(lambda wi: str(wi['id']), workItems)))
-		)
+		workItems = map(lambda wi: WorkItem(wi), workItems)
+		print('\n'.join([str(wi) for wi in workItems]))
