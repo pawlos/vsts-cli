@@ -18,12 +18,12 @@ def do_list_test_plans(self, args):
 
 	if self.vsts_test_plans is None or self.force:
 		result = self.vsts_request.get(self.project_name, '_apis/test/plans?filterActivePlans=true&api-version=5.0-preview.2')
-		vsts_test_plans = [
+		self.vsts_test_plans = [
 			TestPlan(d) for d in 
 			result['value']
 		]
 
-	_print_tests_plans(vsts_test_plans)
+	_print_tests_plans(self.vsts_test_plans)
 
 def _print_tests_plans(plans):
 	print(header('Test plans:'))
