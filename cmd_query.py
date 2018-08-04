@@ -8,6 +8,20 @@ def help_query(self):
 	print(bold('Requirements:'))
 	print_prerequisites(prerequisites(self))
 
+def complete_query(self, text, line, begidx, endidx):
+	return _get_query_ids(self.queries, text)
+
+def _get_query_ids(queries, text):
+	ids = []
+	if queries is None:
+		return []
+	for q in queries:
+		if q.children is not None:
+			ids += _get_query_ids(q.children, text)
+		if str(q.id).startswith(text): 
+			ids.append(str(q.id))
+	return ids
+
 def status_query_id(args):
 	query_not_set = args == '' or args is None
 	return (query_not_set,

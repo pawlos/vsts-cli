@@ -1,4 +1,5 @@
 #models for VSTS
+import uuid
 
 class Project(object):
 	def __init__(self, id, name):
@@ -19,6 +20,15 @@ class TestSuite(object):
 class TestCase(object):
 	def __init__(self, data):
 		self.id = int(data['id'])
+
+class Query(object):
+	def __init__(self, data):
+		self.id = uuid.UUID(data['id'])
+		self.name = data['name']
+		self.children = None
+		if 'children' in data:
+			children = data['children']
+			self.children = [Query(d) for d in children]
 
 class WorkItemRelation(object):
 	def __init__(self, data):

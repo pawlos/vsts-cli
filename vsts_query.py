@@ -20,7 +20,7 @@ class VSTSQuery(cmd.Cmd):
 	from cmd_list_test_runs import do_list_test_runs, help_list_test_runs
 	from cmd_list_test_cases import do_list_test_cases, help_list_test_cases
 	from cmd_list_queries import do_list_queries, help_list_queries
-	from cmd_query import do_query, help_query
+	from cmd_query import do_query, help_query, complete_query
 
 	def __init__(self):
 		super(VSTSQuery, self).__init__()
@@ -32,12 +32,14 @@ class VSTSQuery(cmd.Cmd):
 		self.connection = None
 		self.core_client = None
 		self.vsts_projects = None
+		self.queries = None
 		self.vsts_test_plans = None
 		self.vsts_request = None
 		self.project_name = None
 		self.vsts_test_suites = None
 		self.test_plan = None
 		self.test_suite = None
+		self.force = False
 
 	def setup_connection(self):
 		if self.team_instance != None and self.credentials != None:
