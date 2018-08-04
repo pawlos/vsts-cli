@@ -9,6 +9,9 @@ def help_project_name(self):
 	print(header('Sets the project name for future requests'))
 	print_prerequisites(prerequisites(self))
 
+def complete_project_name(self, text, line, begidx, endidx):
+	return [s.name for s in self.vsts_projects if s.name.startswith(text)]
+
 def prerequisites(vsts):
 	return [vsts.status_project_name()]
 

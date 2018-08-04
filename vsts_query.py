@@ -10,7 +10,7 @@ from vsts_request import *
 class VSTSQuery(cmd.Cmd):
 	from cmd_token import do_token, help_token, status_token
 	from cmd_team_instance import do_team_instance, help_team_instance, status_team_instance
-	from cmd_project_name import do_project_name, help_project_name, status_project_name
+	from cmd_project_name import do_project_name, help_project_name, status_project_name, complete_project_name
 	from cmd_list_projects import do_list_projects, help_list_projects
 	from cmd_list_test_plans import do_list_test_plans, help_list_test_plans
 	from cmd_list_test_suites import do_list_test_suites, help_list_test_suites
