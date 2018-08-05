@@ -19,7 +19,8 @@ class TestSuite(object):
 
 class TestCase(object):
 	def __init__(self, data):
-		self.id = int(data['id'])
+		self.id = int(data['testCase']['id'])
+		self.data = data
 
 class Query(object):
 	def __init__(self, data):

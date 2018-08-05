@@ -31,14 +31,16 @@ class VSTSQuery(cmd.Cmd):
 		self.credentials = None
 		self.connection = None
 		self.core_client = None
+		self.vsts_request = None
+
 		self.vsts_projects = None
 		self.queries = None
 		self.vsts_test_plans = None
-		self.vsts_request = None
 		self.project_name = None
 		self.vsts_test_suites = None
 		self.test_plan = None
 		self.test_suite = None
+		self.test_cases = None
 		self.force = False
 
 	def setup_connection(self):
