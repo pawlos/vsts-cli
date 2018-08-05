@@ -13,6 +13,11 @@ class VSTSRequest:
 		self.token = token
 		self.url = self.team_instance
 
+	def getAbsolute(self, url):
+		resp = requests.get(url, auth=HTTPBasicAuth('', self.token))
+		if resp.status_code != 200:
+			return False
+		return json.loads(resp.text)
 
 	def get(self, project_name, query):
 		print(bold('Request:'), end=' ')

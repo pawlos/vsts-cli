@@ -23,11 +23,13 @@ def do_list_test_cases(self, args):
 			self.project_name,
 			'_apis/test/plans/{}/suites/{}/testcases?api-version=5.0-preview.2'.format(self.test_plan, self.test_suite))
 		self.test_cases = [TestCase(d) for d in result['value']]
+		for tc in self.test_cases:
+			tc.details = self.vsts_request.getAbsolute(tc.url)
 		
 	_print_test_cases(self.test_cases)
 
 def _print_test_cases(test_cases):
 	for t in test_cases:
-		print('Id: {}, Tester: {}'.format(
-			bold(t.id), bold(t.data['pointAssignments'][0]['tester']['displayName'])
+		print('Id: {}, Title: {}, Tester: {}'.format(
+			bold(t.id), bold(t.details['fields']['System.Title']), bold(t.data['pointAssignments'][0]['tester']['displayName'])
 		))
