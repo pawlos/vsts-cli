@@ -15,7 +15,7 @@ class VSTSQuery(cmd.Cmd):
 	from cmd_list_test_plans import do_list_test_plans, help_list_test_plans
 	from cmd_list_test_suites import do_list_test_suites, help_list_test_suites
 	from cmd_test_plan import do_test_plan, help_test_plan, status_test_plan, complete_test_plan
-	from cmd_test_suite import do_test_suite, help_test_suite, status_test_suite
+	from cmd_test_suite import do_test_suite, help_test_suite, status_test_suite, complete_test_suite
 	from cmd_project_details import do_project_details, help_project_details
 	from cmd_list_test_runs import do_list_test_runs, help_list_test_runs
 	from cmd_list_test_cases import do_list_test_cases, help_list_test_cases

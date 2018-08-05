@@ -19,11 +19,11 @@ def do_list_test_suites(self, args):
 
 	if self.vsts_test_suites is None or self.force:
 		result = self.vsts_request.get(self.project_name, '_apis/test/plans/{}/suites?api-version=5.0-preview.2'.format(self.test_plan))
-		vsts_test_suites = [
+		self.vsts_test_suites = [
 			TestSuite(d) for d in result['value']
 		]
 
-	_print_suites(vsts_test_suites)
+	_print_suites(self.vsts_test_suites)
 
 def _print_suites(d):
 	print(header('Test suites:'))

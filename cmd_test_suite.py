@@ -9,6 +9,9 @@ def help_test_suite(self):
 	print(header('Selectes the test suite'))
 	print_prerequisites(prerequisites(self))
 
+def complete_test_suite(self, text, line, begidx, endidx):
+	return [str(p.id) for p in self.vsts_test_suites if str(p.id).startswith(text)]
+
 def prerequisites(vsts):
 	return [vsts.status_test_suite()]
 
