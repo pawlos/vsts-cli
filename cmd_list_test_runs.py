@@ -8,9 +8,9 @@ def help_list_test_runs(self):
 	print_prerequisites(prerequisites(self))
 
 def prerequisites(vsts):
-	return [(vsts.token is None, vsts.status_token()),
-			(vsts.team_instance is None, vsts.status_team_instance()),
-			(vsts.project_name is None, vsts.status_project_name())]
+	return [vsts.status_token(),
+			vsts.status_team_instance(),
+			vsts.status_project_name()]
 
 
 def do_list_test_runs(self, args):
