@@ -42,13 +42,14 @@ class VSTSQuery(cmd.Cmd):
 		self.test_suite = None
 		self.test_cases = None
 		self.force = False
+		self.debug = False
 
 	def setup_connection(self):
 		if self.team_instance != None and self.credentials != None:
 			self.connection = VssConnection(base_url=self.team_instance, 
 										creds=self.credentials)
 			self.core_client = self.connection.get_client('vsts.core.v4_0.core_client.CoreClient')
-			self.vsts_request = VSTSRequest(self.team_instance, self.token)
+			self.vsts_request = VSTSRequest(self.team_instance, self.token, self.debug)
 			print(ok('Connection to VSTS established'))
 
 	def help_exit(self):
