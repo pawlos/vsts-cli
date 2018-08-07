@@ -17,7 +17,7 @@ def do_list_test_runs(self, args):
 	if not print_statuses(prerequisites(self)):
 		return
 
-	result = self.vsts_request.get(self.project_name, '_apis/test/runs?api-version=5.0-preview.2')
+	result = self.vsts_request.get(self.project_name, '_apis/test/runs?planId={}&includeRunDetails=true&api-version=5.0-preview.2'.format(self.test_plan))
 	if not result:
 		return
 	
