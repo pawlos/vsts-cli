@@ -17,8 +17,11 @@ def do_list_test_runs(self, args):
 	if not print_statuses(prerequisites(self)):
 		return
 
-	_print_test_runs(
-		self.vsts_request.get(self.project_name, '_apis/test/runs?api-version=5.0-preview.2'))
+	result = self.vsts_request.get(self.project_name, '_apis/test/runs?api-version=5.0-preview.2')
+	if not result:
+		return
+	
+	_print_test_runs(result)
 
 
 def _print_test_runs(test_runs):
