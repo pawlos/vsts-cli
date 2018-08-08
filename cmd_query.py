@@ -42,18 +42,26 @@ def do_query(self, args):
 	result = self.vsts_request.get(self.project_name, '_apis/wit/wiql/{}?api-version=5.0-preview.2'.format(args))
 	if not result:
 		return
-
-	_print_query(result, args)
-
-def _print_query(result, id):
-	print(header('Query ')+bold(id)+header(' results'))
-	print(header("Columns: ")+', '.join(map(lambda c: c['name'],result['columns'])))
-	print(header('Work items in the query:'))
+	
+	columns = result['columns']
 	if 'workItemRelations' in result:
 		relations = result['workItemRelations']
 		relations = map(lambda wir: WorkItemRelation(wir), relations)
-		print('\n'.join([str(wir) for wir in relations]))
+		_print_query(relations, args, columns)
 	elif 'workItems' in result:
 		workItems = result['workItems']
-		workItems = map(lambda wi: WorkItem(wi), workItems)
-		print('\n'.join([str(wi) for wi in workItems]))
+		items = list(map(lambda wi: WorkItem(wi), workItems))
+
+		for wi in items: 
+			wi.details = self.vsts_request.getAbsolute(wi.url)
+
+		_print_query(items, args, columns)
+
+def _print_query(result, id, columns):
+	print(header('Query ')+bold(id)+header(' results'))
+	print(header("Columns: ")+', '.join(map(lambda c: c['name'], columns)))
+	print(header('Work items in the query:'))
+	
+	for i in result:
+		print('iter')
+		print(i)

@@ -1,5 +1,6 @@
 #models for VSTS
 import uuid
+from printers import bold
 
 class Project(object):
 	def __init__(self, id, name):
@@ -48,4 +49,5 @@ class WorkItem(object):
 		self.details = None
 
 	def __str__(self):
-		return 'Id: '+str(self.id)+' Url: '+self.url
+		data = ('Url: '+self.url) if self.details is None else 'Title: '+bold(self.details['fields']['System.Title'])
+		return 'Id: '+bold(self.id)+', '+data
