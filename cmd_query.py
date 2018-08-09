@@ -63,5 +63,4 @@ def _print_query(result, id, columns):
 	print(header('Work items in the query:'))
 	
 	for i in result:
-		print('iter')
 		print(i)
