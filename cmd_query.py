@@ -18,7 +18,7 @@ def _get_query_ids(queries, text):
 	for q in queries:
 		if q.children is not None:
 			ids += _get_query_ids(q.children, text)
-		if str(q.id).startswith(text): 
+		if str(q.id).startswith(text):
 			ids.append(str(q.id))
 	return ids
 
@@ -42,17 +42,24 @@ def do_query(self, args):
 	result = self.vsts_request.get(self.project_name, '_apis/wit/wiql/{}?api-version=5.0-preview.2'.format(args))
 	if not result:
 		return
-	
+
 	columns = result['columns']
 	if 'workItemRelations' in result:
 		relations = result['workItemRelations']
-		relations = map(lambda wir: WorkItemRelation(wir), relations)
+		relations = list(map(lambda wir: WorkItemRelation(wir), relations))
+
+		for wir in relations:
+			if wir.source is not None and wir.source.details is None:
+				wir.source.details = self.vsts_request.getAbsolute(wir.source.url)
+			if wir.target is not None and wir.target.details is None:
+				wir.target.details = self.vsts_request.getAbsolute(wir.target.url)
+
 		_print_query(relations, args, columns)
 	elif 'workItems' in result:
 		workItems = result['workItems']
 		items = list(map(lambda wi: WorkItem(wi), workItems))
 
-		for wi in items: 
+		for wi in items:
 			wi.details = self.vsts_request.getAbsolute(wi.url)
 
 		_print_query(items, args, columns)
@@ -61,6 +68,6 @@ def _print_query(result, id, columns):
 	print(header('Query ')+bold(id)+header(' results'))
 	print(header("Columns: ")+', '.join(map(lambda c: c['name'], columns)))
 	print(header('Work items in the query:'))
-	
+
 	for i in result:
 		print(i)

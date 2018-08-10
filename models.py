@@ -39,8 +39,8 @@ class WorkItemRelation(object):
 		self.target = None if data['target'] is None else WorkItem(data['target'])
 
 	def __str__(self):
-		return (('' if self.source is None else 'Source: '+str(self.source.id)+' → ')+
-			    ('' if self.target is None else 'Target: '+str(self.target.id)))
+		return (('' if self.source is None else 'Source: '+str(self.source)+' → ')+
+			    ('' if self.target is None else 'Target: '+str(self.target)))
 
 class WorkItem(object):
 	def __init__(self, data):
