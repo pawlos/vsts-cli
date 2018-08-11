@@ -11,6 +11,9 @@ def header(s):
 def ok(s):
 	return bcolors.OKGREEN+str(s)+bcolors.ENDC
 
+def info(s):
+	return bcolors.WARNING+str(s)+bcolors.ENDC
+
 def error(s):
 	return bcolors.FAIL+str(s)+bcolors.ENDC
 

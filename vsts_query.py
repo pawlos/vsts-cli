@@ -22,7 +22,7 @@ class VSTSQuery(cmd.Cmd):
 	from cmd_list_queries import do_list_queries, help_list_queries
 	from cmd_query import do_query, help_query, complete_query
 
-	def __init__(self):
+	def __init__(self, debug):
 		super(VSTSQuery, self).__init__()
 		self.intro = header('VSTS CLI @ Paweł Łukasik 2018')
 		self.prompt = bold('(VSTS)> ')
@@ -42,7 +42,9 @@ class VSTSQuery(cmd.Cmd):
 		self.test_suite = None
 		self.test_cases = None
 		self.force = False
-		self.debug = False
+		self.debug = debug
+		if self.debug:
+			print(info('Debug mode on'))
 
 	def setup_connection(self):
 		if self.team_instance != None and self.credentials != None:
