@@ -20,18 +20,6 @@ def inconclusive(s):
 def indent(s):
 	return '\t'+str(s)
 
-def print_tests_plan(plan):
-	print(header('Test plan:'))
-	print('Id: {}, Name: {}, Root suite id: {}'.format(
-			bold(plan['id']), bold(plan['name']), bold(plan['rootSuite']['id'])
-		))
-
-def print_suite(suite):
-	print(header('Test suite:'))
-	print('Id: {}, Name: {}, Test cases count: {}'.format(
-			bold(suite['id']), bold(suite['name']), bold(suite['testCaseCount'])
-		))
-
 def print_statuses(statues):
 	is_error = False
 	for c, s in statues:
