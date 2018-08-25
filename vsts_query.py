@@ -21,6 +21,7 @@ class VSTSQuery(cmd.Cmd):
 	from cmd_list_test_cases import do_list_test_cases, help_list_test_cases
 	from cmd_list_queries import do_list_queries, help_list_queries
 	from cmd_query import do_query, help_query, complete_query
+	from cmd_req_coverage import do_req_coverage, help_req_coverage
 
 	def __init__(self, debug):
 		super(VSTSQuery, self).__init__()
