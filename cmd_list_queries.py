@@ -1,5 +1,5 @@
 #cmd_list_queries.py
-from printers import error, bold, header, print_prerequisites, print_statuses, indent
+from printers import bold, header, print_prerequisites, print_statuses, indent
 from models import Query
 
 def help_list_queries(self):

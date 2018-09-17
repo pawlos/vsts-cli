@@ -1,6 +1,6 @@
 #cmd_list_test_runs.py
 
-from printers import header, bold, error, print_statuses, print_prerequisites, _status
+from printers import header, bold, print_statuses, print_prerequisites, _status
 
 def help_list_test_runs(self):
 	print(header('Lists all tests runs'))

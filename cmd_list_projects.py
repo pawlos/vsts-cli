@@ -1,5 +1,5 @@
 #cmd_list_projects.py
-from printers import error, bold, header, print_prerequisites, print_statuses
+from printers import bold, header, print_prerequisites, print_statuses
 from models import Project
 
 def help_list_projects(self):

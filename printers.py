@@ -1,5 +1,4 @@
 from bcolors import *
-import pprint
 
 
 def bold(s):

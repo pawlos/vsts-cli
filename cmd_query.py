@@ -1,7 +1,6 @@
 #cmd_query.py
-from printers import error, bold, header, ok, indent, print_prerequisites, print_statuses
+from printers import error, bold, header, ok, print_prerequisites, print_statuses
 from models import WorkItemRelation, WorkItem
-import pprint
 
 def help_query(self):
 	print(header('Runs selected query'))

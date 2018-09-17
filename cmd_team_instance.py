@@ -1,5 +1,5 @@
 #cmd_team_instance.py
-from printers import error, ok, bold, header, print_prerequisites, print_statuses
+from printers import error, ok, bold, header, print_prerequisites
 
 def status_team_instance(self):
 	return (self.team_instance is None, 
