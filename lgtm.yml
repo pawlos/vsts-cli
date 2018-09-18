@@ -4,4 +4,4 @@ extraction:
       version: 3
       requirements_files:
         - requirements.txt
-      setup.py: false
+      setup_py: false
