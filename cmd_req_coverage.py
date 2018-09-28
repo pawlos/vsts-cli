@@ -1,5 +1,5 @@
 #cmd_req_coverage.py
-from printers import header, bold, print_prerequisites
+from printers import header, error, bold, print_prerequisites
 
 def help_req_coverage(self):
 	print(header('Check coverage of formal requirements with test-runs'))
@@ -12,4 +12,7 @@ def prerequisites(vsts, args = None):
 			vsts.status_project_name()]
 
 def do_req_coverage(self, args):
+	if args == '':
+		print(error('Please provide parameters'))
+
 	pass
