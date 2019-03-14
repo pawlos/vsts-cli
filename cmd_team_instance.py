@@ -17,6 +17,6 @@ def do_team_instance(self, args):
 		print(error('Team instance not provided'))
 		return
 
-	self.team_instance = 'https://{}.visualstudio.com'.format(args)
+	self.team_instance = 'https://{}.visualstudio.com'.format(args.lstrip('='))
 	print_prerequisites(prerequisites(self))
 	self.setup_connection()

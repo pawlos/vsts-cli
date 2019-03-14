@@ -18,7 +18,7 @@ def do_token(self, args):
 		print(error('Token not provided'))
 		return
 
-	self.token = args
+	self.token = args.lstrip('=')
 	self.credentials = BasicAuthentication('', self.token)
 	print_prerequisites(prerequisites(self))
 	self.setup_connection()
