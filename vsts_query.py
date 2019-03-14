@@ -2,6 +2,7 @@
 import cmd
 
 from vsts.vss_connection import VssConnection
+from vsts.exceptions import VstsServiceError
 
 from printers import *
 from models import *
@@ -49,11 +50,14 @@ class VSTSQuery(cmd.Cmd):
 
 	def setup_connection(self):
 		if self.team_instance != None and self.credentials != None:
-			self.connection = VssConnection(base_url=self.team_instance, 
-										creds=self.credentials)
-			self.core_client = self.connection.get_client('vsts.core.v4_0.core_client.CoreClient')
-			self.vsts_request = VSTSRequest(self.team_instance, self.token, self.debug)
-			print(ok('Connection to VSTS established'))
+			try:
+				self.connection = VssConnection(base_url=self.team_instance, 
+												creds=self.credentials)
+				self.core_client = self.connection.get_client('vsts.core.v4_0.core_client.CoreClient')
+				self.vsts_request = VSTSRequest(self.team_instance, self.token, self.debug)
+				print(ok('Connection to VSTS established'))
+			except VstsServiceError as e:
+				print(error('Problem with connecting to VSTS service'))
 
 	def help_exit(self):
 		print(header('Exits the tool'))
